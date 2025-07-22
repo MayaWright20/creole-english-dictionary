@@ -17,9 +17,9 @@ type StoreState = {
 export const usePersistStore = create<StoreState>()(
   persist(
     (set) => ({
-      words: [],
-      setWords: (name) => set((state) => ({ words: [...state.words, name] })),
-      reset: () => set({ words: [] }),
+      words: [{ english: 'Yes', creole: 'Wi' }],
+      setWords: (word) => set((state) => ({ words: [...state.words, word] })),
+      reset: () => set({ words: [{ english: 'Yes', creole: 'Wi' }] }),
     }),
     {
       name: 'WORDS',
