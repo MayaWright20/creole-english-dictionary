@@ -20,8 +20,17 @@ export default function RootLayout() {
         }),
       }}
     >
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="index"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="house" color={color} />
+          ),
+        }}
+      /> */}
+      <Tabs.Screen
+        name="(home)"
         options={{
           title: 'Home',
           tabBarIcon: ({ color }) => (
