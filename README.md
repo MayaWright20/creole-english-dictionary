@@ -1,3 +1,10 @@
+TODO:
+
+- Add order by creole
+- Add order by english
+- Add alphabetical order to dictionary
+- Favourites alphabetical order
+
 # Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
