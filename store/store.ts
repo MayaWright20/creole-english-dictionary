@@ -1,25 +1,31 @@
 // store/useAppStore.ts
+import { StoreState } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface WORDS {
-  english: string;
-  creole: string;
-}
-
-type StoreState = {
-  words: WORDS[];
-  setWords: (input: WORDS) => void;
-  reset: () => void;
-};
-
 export const usePersistStore = create<StoreState>()(
   persist(
     (set) => ({
-      words: [{ english: 'Yes', creole: 'Wi' }],
+      words: [{ id: 0, isFavourited: false, english: 'Yes', creole: 'Wi' }],
       setWords: (word) => set((state) => ({ words: [...state.words, word] })),
-      reset: () => set({ words: [{ english: 'Yes', creole: 'Wi' }] }),
+      reset: () =>
+        set({
+          words: [{ id: 0, isFavourited: false, english: 'Yes', creole: 'Wi' }],
+          favourites: [],
+        }),
+      favourites: [],
+      toggleFavourite: (value) =>
+        set((state) => ({
+          favourites: state.favourites.some((fav) => fav.id === value.id)
+            ? state.favourites.filter((fav) => fav.id !== value.id)
+            : [...state.favourites, value],
+          words: state.words.map((word) =>
+            word.id === value.id
+              ? { ...word, isFavourited: !word.isFavourited }
+              : word
+          ),
+        })),
     }),
     {
       name: 'WORDS',

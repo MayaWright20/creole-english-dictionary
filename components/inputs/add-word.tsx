@@ -19,11 +19,12 @@ export default function AddWord() {
   const [english, setEnglish] = useState('');
   const [creole, setCreole] = useState('');
 
+  const words = usePersistStore((state: any) => state.words);
   const setWords = usePersistStore((state: any) => state.setWords);
   const reset = usePersistStore((state: any) => state.reset);
 
   const addWord = () => {
-    setWords({ english: english, creole: creole });
+    setWords({ id: words.length, english: english, creole: creole });
     setEnglish('');
     setCreole('');
   };
@@ -61,12 +62,12 @@ export default function AddWord() {
       >
         <Text style={styles.buttonText}>Add to Dictionary</Text>
       </TouchableOpacity>
-      {/* <TouchableOpacity
+      <TouchableOpacity
         onPress={() => reset()}
         style={[styles.buttonWrapper, { backgroundColor: 'pink' }]}
       >
         <Text style={styles.buttonText}>reset</Text>
-      </TouchableOpacity> */}
+      </TouchableOpacity>
     </View>
   );
 }

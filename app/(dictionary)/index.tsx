@@ -1,5 +1,6 @@
 import DictionaryCard from '@/components/cards/dictionary-card';
 import { usePersistStore } from '@/store/store';
+import { WORD } from '@/types';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -17,6 +18,9 @@ const DATA = [
 
 export default function Dictionary() {
   const WORDS = usePersistStore((state: any) => state.words);
+  const toggleFavourite = usePersistStore(
+    (state: any) => state.toggleFavourite
+  );
 
   return (
     <KeyboardAvoidingView
@@ -29,8 +33,10 @@ export default function Dictionary() {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        {WORDS.map((item, index) => (
+        {WORDS.map((item: WORD, index: number) => (
           <DictionaryCard
+            onPressIsFavourite={() => toggleFavourite(item)}
+            isFavourited={item.isFavourited}
             key={index}
             title={item.english}
             description={item.creole}
