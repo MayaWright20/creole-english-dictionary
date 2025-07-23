@@ -37,6 +37,8 @@ export default function AddWord() {
           value={english}
           placeholder="English"
           style={styles.textInput}
+          autoComplete="off"
+          autoCorrect={false}
         />
       </View>
       <View style={styles.wordWrapper}>
@@ -45,6 +47,8 @@ export default function AddWord() {
           value={creole}
           placeholder="Creole"
           style={styles.textInput}
+          autoComplete="off"
+          autoCorrect={false}
         />
       </View>
       <TouchableOpacity

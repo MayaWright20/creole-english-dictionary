@@ -1,4 +1,5 @@
 import DictionaryCard from '@/components/cards/dictionary-card';
+import { PADDING } from '@/constants/styles';
 import { usePersistStore } from '@/store/store';
 import { WORD } from '@/types';
 import {
@@ -7,14 +8,6 @@ import {
   ScrollView,
   StyleSheet,
 } from 'react-native';
-
-const DATA = [
-  {
-    english: 'hello',
-    creole: 'bonjure',
-  },
-  { english: 'hello1', creole: 'bonjure1' },
-];
 
 export default function Dictionary() {
   const WORDS = usePersistStore((state: any) => state.words);
@@ -33,11 +26,13 @@ export default function Dictionary() {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        {WORDS.map((item: WORD, index: number) => (
+        {WORDS.sort((a: WORD, b: WORD) =>
+          a.english.localeCompare(b.english)
+        ).map((item: WORD, index: number) => (
           <DictionaryCard
             onPressIsFavourite={() => toggleFavourite(item)}
             isFavourited={item.isFavourited}
-            key={index}
+            key={`${index}-${item.english}-${item.creole}`}
             title={item.english}
             description={item.creole}
           />
@@ -52,6 +47,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {
-    flex: 1,
+    flexGrow: 1,
+    paddingBottom:
+      typeof PADDING.XLARGE_PERCENTAGE === 'string'
+        ? (PADDING.XLARGE_PERCENTAGE as `${number}%`)
+        : PADDING.XLARGE_PERCENTAGE,
   },
 });

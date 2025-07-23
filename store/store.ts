@@ -1,4 +1,3 @@
-// store/useAppStore.ts
 import { StoreState } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';

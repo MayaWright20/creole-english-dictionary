@@ -12,6 +12,7 @@ export const PADDING = {
   MEDIUM: 10,
   LARGE: 20,
   XLARGE: 30,
+  XLARGE_PERCENTAGE: `50%`,
 };
 
 // MARGIN
