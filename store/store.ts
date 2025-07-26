@@ -12,7 +12,14 @@ export const usePersistStore = create<StoreState>()(
       reset: () =>
         set({
           words: DATA,
-          favourites: [],
+          favourites: [
+            {
+              id: 0,
+              isFavourited: false,
+              english: 'Sweetheart',
+              creole: 'Sousou',
+            },
+          ],
         }),
       orderByEnglish: true,
       setOrderByEnglish: (value) => set((state) => ({ orderByEnglish: value })),
@@ -26,7 +33,14 @@ export const usePersistStore = create<StoreState>()(
         }),
       testByEnglish: true,
       setTestByEnglish: (value) => set((state) => ({ testByEnglish: value })),
-      favourites: [],
+      favourites: [
+        {
+          id: 0,
+          isFavourited: false,
+          english: 'Sweetheart',
+          creole: 'Sousou',
+        },
+      ],
       toggleFavourite: (value) =>
         set((state) => ({
           favourites: state.favourites.some((fav) => fav.id === value.id)

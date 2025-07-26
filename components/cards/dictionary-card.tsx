@@ -55,12 +55,10 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.MEDIUM,
     fontWeight: FONT_WEIGHT.MEDIUM,
     color: COLORS.BLUE,
-    textTransform: 'capitalize',
   },
   description: {
     fontSize: FONT_SIZE.SMALL,
     fontWeight: FONT_WEIGHT.SMALL,
-    textTransform: 'capitalize',
   },
   iconWrapper: {
     alignItems: 'flex-end',
