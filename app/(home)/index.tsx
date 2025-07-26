@@ -9,7 +9,13 @@ import {
 import { usePersistStore } from '@/store/store';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 export default function Home() {
   const WORDS = usePersistStore((state: any) => state.words);
@@ -54,7 +60,7 @@ export default function Home() {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.iconWrapper}>
         <FontAwesome
           name={WORDS[randomInt].isFavourited ? 'heart' : 'heart-o'}
@@ -63,12 +69,12 @@ export default function Home() {
           onPress={() => toggleFavourite(WORDS[randomInt])}
         />
         <View style={styles.contentContainer}>
-          <View>
-            <Text style={styles.title}>{WORDS[randomInt].english}</Text>
-            {isRevealAnswer && (
-              <Text style={styles.titleAnswer}>{WORDS[randomInt].creole}</Text>
-            )}
-          </View>
+          {/* <View> */}
+          <Text style={styles.title}>{WORDS[randomInt].english}</Text>
+          {isRevealAnswer && (
+            <Text style={styles.titleAnswer}>{WORDS[randomInt].creole}</Text>
+          )}
+          {/* </View> */}
 
           <View style={styles.answerContainer}>
             <View>
@@ -129,18 +135,13 @@ export default function Home() {
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: '95%',
-    // margin: MARGIN.SMALL,
-    // borderRadius: BORDER_RADIUS.LARGE,
     backgroundColor: COLORS.WHITE,
-    // borderWidth: 1.5,
-    // Shadow for iOS
     shadowColor: 'black',
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.7,
@@ -148,6 +149,7 @@ const styles = StyleSheet.create({
     // Shadow for Android
     elevation: 12,
     padding: PADDING.XLARGE,
+    paddingBottom: '50%',
   },
   iconWrapper: {
     alignItems: 'flex-end',
@@ -156,7 +158,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingTop: '10%',
-    // justifyContent: 'center',
     width: '100%',
     height: '94%',
   },
@@ -171,28 +172,20 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   answerContainer: {
-    // backgroundColor: 'pink',
     marginTop: '13%',
     width: '100%',
     flex: 1,
-    padding: PADDING.MEDIUM,
     justifyContent: 'space-between',
-    position: 'absolute',
-    // width: '90%',
-    bottom: 95,
     alignSelf: 'center',
   },
   answerWrapper: {
     marginVertical: MARGIN.SMALL,
     borderRadius: BORDER_RADIUS.MEDIUM,
     backgroundColor: COLORS.WHITE,
-    // borderWidth: 1.5,
-    // Shadow for iOS
     shadowColor: 'black',
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.7,
     shadowRadius: 4,
-    // Shadow for Android
     elevation: 12,
     padding: PADDING.XLARGE,
   },
@@ -203,22 +196,18 @@ const styles = StyleSheet.create({
   nextButton: {
     backgroundColor: 'black',
     textAlign: 'center',
-    // marginHorizontal: '20%',
     padding: 20,
     borderRadius: BORDER_RADIUS.XLARGE,
     alignItems: 'center',
     justifyContent: 'center',
-    // Shadow for iOS
     shadowColor: 'black',
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.7,
     shadowRadius: 4,
-    // Shadow for Android
     elevation: 12,
-    position: 'absolute',
     width: '90%',
-    bottom: -90,
     alignSelf: 'center',
+    marginTop: '13%',
   },
   nextButtonText: {
     color: 'white',
