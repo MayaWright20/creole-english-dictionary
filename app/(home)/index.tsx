@@ -164,12 +164,10 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZE.XLARGE,
     fontWeight: FONT_WEIGHT.MEDIUM,
     color: COLORS.BLUE,
-    textTransform: 'capitalize',
   },
   titleAnswer: {
     fontSize: FONT_SIZE.XLARGE,
     fontWeight: FONT_WEIGHT.MEDIUM,
-    textTransform: 'capitalize',
     marginTop: 5,
   },
   answerContainer: {
@@ -201,7 +199,6 @@ const styles = StyleSheet.create({
   answer: {
     fontSize: FONT_SIZE.MEDIUM,
     fontWeight: FONT_WEIGHT.MEDIUM,
-    textTransform: 'capitalize',
   },
   nextButton: {
     backgroundColor: 'black',
