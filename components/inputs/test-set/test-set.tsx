@@ -60,7 +60,7 @@ export default function TestSet({
           },
         ]}
       >
-        <Text style={styles.buttonText}>Add to Dictionary</Text>
+        <Text style={styles.buttonText}>Show all words</Text>
       </TouchableOpacity>
     </View>
   );
