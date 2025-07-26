@@ -68,12 +68,12 @@ export default function AddWord() {
       >
         <Text style={styles.buttonText}>Add to Dictionary</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => reset()}
         style={[styles.buttonWrapper, { backgroundColor: 'pink' }]}
       >
         <Text style={styles.buttonText}>reset</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 }
