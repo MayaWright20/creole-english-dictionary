@@ -3,6 +3,8 @@ export const COLORS = {
   LIGHT_GREY: 'rgba(248, 248, 248, 1)',
   GREY: 'rgba(150, 150, 150, 1)',
   BLUE: '#2fc6ec',
+  GREEN: '#35ec2f',
+  RED: '#ec382f',
 };
 
 // PADDING
