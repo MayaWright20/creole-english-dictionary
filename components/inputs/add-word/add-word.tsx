@@ -2,6 +2,7 @@ import {
   BORDER_RADIUS,
   COLORS,
   FONT_SIZE,
+  FONT_WEIGHT,
   MARGIN,
   PADDING,
 } from '@/constants/styles';
@@ -31,6 +32,7 @@ export default function AddWord() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Add Word</Text>
       <View style={styles.wordWrapper}>
         <TextInput
           onChangeText={setEnglish}
@@ -141,5 +143,10 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: FONT_SIZE.SMALL,
     color: 'black',
+  },
+  title: {
+    fontSize: FONT_SIZE.XLARGE,
+    fontWeight: FONT_WEIGHT.MEDIUM,
+    color: COLORS.BLUE,
   },
 });

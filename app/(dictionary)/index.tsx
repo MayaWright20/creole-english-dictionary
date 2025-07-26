@@ -16,6 +16,7 @@ export default function Dictionary() {
   const toggleFavourite = usePersistStore(
     (state: any) => state.toggleFavourite
   );
+  const orderByEnglish = usePersistStore((state: any) => state.orderByEnglish);
 
   const { search, setSearch, filteredWords } = useSearch(WORDS);
 
@@ -35,14 +36,20 @@ export default function Dictionary() {
         showsVerticalScrollIndicator={false}
       >
         {filteredWords
-          .sort((a: WORD, b: WORD) => a.english.localeCompare(b.english))
+          .sort((a: WORD, b: WORD) => {
+            if (orderByEnglish) {
+              return a.english.localeCompare(b.english);
+            } else {
+              return a.creole.localeCompare(b.creole);
+            }
+          })
           .map((item: WORD, index: number) => (
             <DictionaryCard
               onPressIsFavourite={() => toggleFavourite(item)}
               isFavourited={item.isFavourited}
               key={`${index}-${item.english}-${item.creole}`}
-              title={item.english}
-              description={item.creole}
+              title={orderByEnglish ? item.english : item.creole}
+              description={orderByEnglish ? item.creole : item.english}
             />
           ))}
       </ScrollView>

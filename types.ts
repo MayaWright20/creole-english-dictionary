@@ -11,4 +11,6 @@ export type StoreState = {
   reset: () => void;
   favourites: WORD[];
   toggleFavourite: (word: WORD) => void;
+  orderByEnglish: boolean;
+  setOrderByEnglish: (value: boolean) => void;
 };

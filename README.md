@@ -2,8 +2,6 @@ TODO:
 
 - Add order by creole
 - Add order by english
-- Add alphabetical order to dictionary
-- Favourites alphabetical order
 
 # Welcome to your Expo app 👋
 
