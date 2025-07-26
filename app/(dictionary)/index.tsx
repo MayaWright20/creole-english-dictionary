@@ -1,5 +1,7 @@
 import DictionaryCard from '@/components/cards/dictionary-card';
+import SearchBar from '@/components/search-bar/search-bar';
 import { PADDING } from '@/constants/styles';
+import { useSearch } from '@/hooks/search-hook';
 import { usePersistStore } from '@/store/store';
 import { WORD } from '@/types';
 import {
@@ -15,28 +17,34 @@ export default function Dictionary() {
     (state: any) => state.toggleFavourite
   );
 
+  const { search, setSearch, filteredWords } = useSearch(WORDS);
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
     >
+      <SearchBar
+        input={search}
+        setSearchInput={(searchInput) => setSearch(searchInput)}
+      />
       <ScrollView
         contentContainerStyle={styles.scrollView}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        {WORDS.sort((a: WORD, b: WORD) =>
-          a.english.localeCompare(b.english)
-        ).map((item: WORD, index: number) => (
-          <DictionaryCard
-            onPressIsFavourite={() => toggleFavourite(item)}
-            isFavourited={item.isFavourited}
-            key={`${index}-${item.english}-${item.creole}`}
-            title={item.english}
-            description={item.creole}
-          />
-        ))}
+        {filteredWords
+          .sort((a: WORD, b: WORD) => a.english.localeCompare(b.english))
+          .map((item: WORD, index: number) => (
+            <DictionaryCard
+              onPressIsFavourite={() => toggleFavourite(item)}
+              isFavourited={item.isFavourited}
+              key={`${index}-${item.english}-${item.creole}`}
+              title={item.english}
+              description={item.creole}
+            />
+          ))}
       </ScrollView>
     </KeyboardAvoidingView>
   );

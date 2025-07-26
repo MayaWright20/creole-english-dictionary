@@ -1,3 +1,4 @@
+import { DATA } from '@/data';
 import { StoreState } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
@@ -6,11 +7,11 @@ import { persist } from 'zustand/middleware';
 export const usePersistStore = create<StoreState>()(
   persist(
     (set) => ({
-      words: [{ id: 0, isFavourited: false, english: 'Yes', creole: 'Wi' }],
+      words: DATA,
       setWords: (word) => set((state) => ({ words: [...state.words, word] })),
       reset: () =>
         set({
-          words: [{ id: 0, isFavourited: false, english: 'Yes', creole: 'Wi' }],
+          words: DATA,
           favourites: [],
         }),
       favourites: [],
