@@ -1,6 +1,6 @@
 import DictionaryCard from '@/components/cards/dictionary-card';
 import SearchBar from '@/components/search-bar/search-bar';
-import { PADDING } from '@/constants/styles';
+import { COLORS, FONT_WEIGHT, MARGIN, PADDING } from '@/constants/styles';
 import { useSearch } from '@/hooks/search-hook';
 import { usePersistStore } from '@/store/store';
 import { WORD } from '@/types';
@@ -9,6 +9,8 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
+  Text,
+  View,
 } from 'react-native';
 
 export default function Dictionary() {
@@ -35,6 +37,7 @@ export default function Dictionary() {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
+        <Text style={styles.title}>A</Text>
         {filteredWords
           .sort((a: WORD, b: WORD) => {
             if (orderByEnglish) {
@@ -43,15 +46,53 @@ export default function Dictionary() {
               return a.creole.localeCompare(b.creole);
             }
           })
-          .map((item: WORD, index: number) => (
-            <DictionaryCard
-              onPressIsFavourite={() => toggleFavourite(item)}
-              isFavourited={item.isFavourited}
-              key={`${index}-${item.english}-${item.creole}`}
-              title={orderByEnglish ? item.english : item.creole}
-              description={orderByEnglish ? item.creole : item.english}
-            />
-          ))}
+          .map((item: WORD, index: number) => {
+            const sortedWords = filteredWords.sort((a: WORD, b: WORD) => {
+              if (orderByEnglish) {
+                return a.english.localeCompare(b.english);
+              } else {
+                return a.creole.localeCompare(b.creole);
+              }
+            });
+
+            const currentWord = orderByEnglish ? item.english : item.creole;
+            const nextWord = sortedWords[index + 1]
+              ? orderByEnglish
+                ? sortedWords[index + 1].english
+                : sortedWords[index + 1].creole
+              : null;
+
+            const showSeparator =
+              nextWord &&
+              currentWord.charAt(0).toUpperCase() !==
+                nextWord.charAt(0).toUpperCase();
+
+            if (showSeparator) {
+              return (
+                <View key={`${index}-${item.english}-${item.creole}`}>
+                  <DictionaryCard
+                    onPressIsFavourite={() => toggleFavourite(item)}
+                    isFavourited={item.isFavourited}
+                    title={orderByEnglish ? item.english : item.creole}
+                    description={orderByEnglish ? item.creole : item.english}
+                  />
+                  <Text style={styles.title}>
+                    {nextWord.charAt(0).toUpperCase()}
+                  </Text>
+                </View>
+              );
+            } else {
+              return (
+                <DictionaryCard
+                  onPressIsFavourite={() => toggleFavourite(item)}
+                  isFavourited={item.isFavourited}
+                  key={`${index}-${item.english}-${item.creole}`}
+                  title={orderByEnglish ? item.english : item.creole}
+                  description={orderByEnglish ? item.creole : item.english}
+                />
+              );
+            }
+          })}
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -67,5 +108,11 @@ const styles = StyleSheet.create({
       typeof PADDING.XLARGE_PERCENTAGE === 'string'
         ? (PADDING.XLARGE_PERCENTAGE as `${number}%`)
         : PADDING.XLARGE_PERCENTAGE,
+  },
+  title: {
+    fontSize: 50,
+    fontWeight: FONT_WEIGHT.MEDIUM,
+    color: COLORS.BLUE,
+    margin: MARGIN.XLARGE,
   },
 });
