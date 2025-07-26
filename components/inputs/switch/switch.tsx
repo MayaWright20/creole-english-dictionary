@@ -16,7 +16,7 @@ export default function Switch() {
   const orderByEnglish = usePersistStore((state: any) => state.orderByEnglish);
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Order by:</Text>
+      <Text style={styles.title}>Order by</Text>
       <View style={styles.itemContainer}>
         <TouchableOpacity
           onPress={() => setOrderByEnglish(true)}
