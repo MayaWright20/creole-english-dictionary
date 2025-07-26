@@ -8,12 +8,11 @@ export function useSearch(words: WORD[]) {
   useEffect(() => {
     if (search.trim() !== '') {
       const filtered = words.filter((item: WORD) => {
-        const searchLetters = search.toLowerCase().split('');
+        const searchTerm = search.toLowerCase();
         const englishWord = item.english.toLowerCase();
         const creoleWord = item.creole.toLowerCase();
-        return searchLetters.every(
-          (letter) =>
-            englishWord.includes(letter) || creoleWord.includes(letter)
+        return (
+          englishWord.includes(searchTerm) || creoleWord.includes(searchTerm)
         );
       });
       setFilteredWords(filtered);
