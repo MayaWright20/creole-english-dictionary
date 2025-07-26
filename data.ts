@@ -1,5 +1,11 @@
 export const DATA = [
   {
+    id: 0,
+    isFavourited: false,
+    english: 'Sweetheart',
+    creole: 'Sousou',
+  },
+  {
     id: 1,
     isFavourited: false,
     english: 'Cheers',
