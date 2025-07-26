@@ -1,17 +1,51 @@
-import { DATA } from '@/data';
+import { getDataLength, loadData } from '@/data-loader';
 import { StoreState } from '@/types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-export const usePersistStore = create<StoreState>()(
+// Extended store state to handle loading
+interface ExtendedStoreState extends StoreState {
+  isDataLoaded: boolean;
+  isLoading: boolean;
+  loadWords: () => Promise<void>;
+  dataLength: number;
+  setDataLength: (length: number) => void;
+}
+
+export const usePersistStore = create<ExtendedStoreState>()(
   persist(
-    (set) => ({
-      words: DATA,
+    (set, get) => ({
+      words: [],
+      isDataLoaded: false,
+      isLoading: false,
+      dataLength: 0,
+      setDataLength: (length) => set({ dataLength: length }),
+      loadWords: async () => {
+        const { isDataLoaded, isLoading } = get();
+        if (isDataLoaded || isLoading) return;
+
+        set({ isLoading: true });
+        try {
+          const data = await loadData();
+          const length = await getDataLength();
+          set({
+            words: data,
+            isDataLoaded: true,
+            isLoading: false,
+            dataLength: length,
+            testSetMax: length,
+          });
+        } catch (error) {
+          console.error('Failed to load words:', error);
+          set({ isLoading: false });
+        }
+      },
       setWords: (word) => set((state) => ({ words: [...state.words, word] })),
-      reset: () =>
+      reset: async () => {
+        const data = await loadData();
         set({
-          words: DATA,
+          words: data,
           favourites: [
             {
               id: 0,
@@ -20,17 +54,20 @@ export const usePersistStore = create<StoreState>()(
               creole: 'Sousou',
             },
           ],
-        }),
+        });
+      },
       orderByEnglish: true,
       setOrderByEnglish: (value) => set((state) => ({ orderByEnglish: value })),
       testSetMin: 0,
       setTestSetMin: (value) => set((state) => ({ testSetMin: value })),
-      testSetMax: DATA.length,
+      testSetMax: 0,
       setTestSetMax: (value) => set((state) => ({ testSetMax: value })),
-      setAllTestSet: () =>
+      setAllTestSet: () => {
+        const { dataLength } = get();
         set({
-          testSetMax: DATA.length,
-        }),
+          testSetMax: dataLength,
+        });
+      },
       testByEnglish: true,
       setTestByEnglish: (value) => set((state) => ({ testByEnglish: value })),
       favourites: [

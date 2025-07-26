@@ -20,4 +20,10 @@ export type StoreState = {
   testSetMax: number;
   setTestSetMax: (value: number) => void;
   setAllTestSet: () => void;
+  // New properties for optimized loading
+  isDataLoaded: boolean;
+  isLoading: boolean;
+  loadWords: () => Promise<void>;
+  dataLength: number;
+  setDataLength: (length: number) => void;
 };
