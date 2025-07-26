@@ -16,6 +16,14 @@ export const usePersistStore = create<StoreState>()(
         }),
       orderByEnglish: true,
       setOrderByEnglish: (value) => set((state) => ({ orderByEnglish: value })),
+      testSetMin: 0,
+      setTestSetMin: (value) => set((state) => ({ testSetMin: value })),
+      testSetMax: DATA.length,
+      setTestSetMax: (value) => set((state) => ({ testSetMax: value })),
+      setAllTestSet: () =>
+        set({
+          testSetMax: DATA.length,
+        }),
       testByEnglish: true,
       setTestByEnglish: (value) => set((state) => ({ testByEnglish: value })),
       favourites: [],

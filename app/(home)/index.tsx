@@ -24,9 +24,11 @@ export default function Home() {
   );
 
   const testByEnglish = usePersistStore((state: any) => state.testByEnglish);
+  const testSetMin = usePersistStore((state: any) => state.testSetMin);
+  const testSetMax = usePersistStore((state: any) => state.testSetMax);
 
   const [randomInt, setRandomInt] = useState(
-    Math.floor(Math.random() * WORDS.length)
+    Math.floor(Math.random() * (testSetMax - testSetMin + 1)) + testSetMin
   );
   const [randomIntAnswerPosition, setRandomAnswerPosition] = useState(
     Math.floor(Math.random() * 4)
@@ -40,10 +42,10 @@ export default function Home() {
 
   const [setArray, setSetArray] = useState(
     new Set([
-      Math.floor(Math.random() * WORDS.length),
-      Math.floor(Math.random() * WORDS.length),
-      Math.floor(Math.random() * WORDS.length),
-      Math.floor(Math.random() * WORDS.length),
+      Math.floor(Math.random() * (testSetMax - testSetMin + 1)) + testSetMin,
+      Math.floor(Math.random() * (testSetMax - testSetMin + 1)) + testSetMin,
+      Math.floor(Math.random() * (testSetMax - testSetMin + 1)) + testSetMin,
+      Math.floor(Math.random() * (testSetMax - testSetMin + 1)) + testSetMin,
     ])
   );
 
@@ -51,13 +53,15 @@ export default function Home() {
     setIsRevealAnswer(false);
     setSetArray(
       new Set([
-        Math.floor(Math.random() * WORDS.length),
-        Math.floor(Math.random() * WORDS.length),
-        Math.floor(Math.random() * WORDS.length),
-        Math.floor(Math.random() * WORDS.length),
+        Math.floor(Math.random() * (testSetMax - testSetMin + 1)) + testSetMin,
+        Math.floor(Math.random() * (testSetMax - testSetMin + 1)) + testSetMin,
+        Math.floor(Math.random() * (testSetMax - testSetMin + 1)) + testSetMin,
+        Math.floor(Math.random() * (testSetMax - testSetMin + 1)) + testSetMin,
       ])
     );
-    setRandomInt(Math.floor(Math.random() * WORDS.length));
+    setRandomInt(
+      Math.floor(Math.random() * (testSetMax - testSetMin + 1)) + testSetMin
+    );
     setRandomAnswerPosition(Math.floor(Math.random() * 4));
   };
 
@@ -163,6 +167,7 @@ const styles = StyleSheet.create({
     elevation: 12,
     padding: PADDING.XLARGE,
     paddingBottom: '50%',
+    minHeight: '100%',
   },
   iconWrapper: {
     alignItems: 'flex-end',

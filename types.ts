@@ -15,4 +15,9 @@ export type StoreState = {
   setOrderByEnglish: (value: boolean) => void;
   testByEnglish: boolean;
   setTestByEnglish: (value: boolean) => void;
+  testSetMin: number;
+  setTestSetMin: (value: number) => void;
+  testSetMax: number;
+  setTestSetMax: (value: number) => void;
+  setAllTestSet: () => void;
 };
