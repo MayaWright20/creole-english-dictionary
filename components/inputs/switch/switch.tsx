@@ -6,39 +6,36 @@ import {
   MARGIN,
   PADDING,
 } from '@/constants/styles';
-import { usePersistStore } from '@/store/store';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function Switch() {
-  const setOrderByEnglish = usePersistStore(
-    (state: any) => state.setOrderByEnglish
-  );
-  const orderByEnglish = usePersistStore((state: any) => state.orderByEnglish);
+export default function Switch({
+  title,
+  orderBy,
+  setOrderBy,
+}: {
+  title: string;
+  orderBy: boolean;
+  setOrderBy: (value: boolean) => void;
+}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Order by</Text>
+      <Text style={styles.title}>{title}</Text>
       <View style={styles.itemContainer}>
-        <TouchableOpacity
-          onPress={() => setOrderByEnglish(true)}
-          style={styles.item}
-        >
+        <TouchableOpacity onPress={() => setOrderBy(true)} style={styles.item}>
           <Text
             style={[
               styles.itemTitle,
-              { color: orderByEnglish ? COLORS.BLUE : COLORS.GREY },
+              { color: orderBy ? COLORS.BLUE : COLORS.GREY },
             ]}
           >
             English
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setOrderByEnglish(false)}
-          style={styles.item}
-        >
+        <TouchableOpacity onPress={() => setOrderBy(false)} style={styles.item}>
           <Text
             style={[
               styles.itemTitle,
-              { color: orderByEnglish ? COLORS.GREY : COLORS.BLUE },
+              { color: orderBy ? COLORS.GREY : COLORS.BLUE },
             ]}
           >
             Creole

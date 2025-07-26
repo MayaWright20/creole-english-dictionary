@@ -16,6 +16,8 @@ export const usePersistStore = create<StoreState>()(
         }),
       orderByEnglish: true,
       setOrderByEnglish: (value) => set((state) => ({ orderByEnglish: value })),
+      testByEnglish: true,
+      setTestByEnglish: (value) => set((state) => ({ testByEnglish: value })),
       favourites: [],
       toggleFavourite: (value) =>
         set((state) => ({

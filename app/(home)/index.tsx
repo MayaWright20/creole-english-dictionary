@@ -23,6 +23,8 @@ export default function Home() {
     (state: any) => state.toggleFavourite
   );
 
+  const testByEnglish = usePersistStore((state: any) => state.testByEnglish);
+
   const [randomInt, setRandomInt] = useState(
     Math.floor(Math.random() * WORDS.length)
   );
@@ -69,12 +71,16 @@ export default function Home() {
           onPress={() => toggleFavourite(WORDS[randomInt])}
         />
         <View style={styles.contentContainer}>
-          {/* <View> */}
-          <Text style={styles.title}>{WORDS[randomInt].english}</Text>
+          <Text style={styles.title}>
+            {testByEnglish ? WORDS[randomInt].english : WORDS[randomInt].creole}
+          </Text>
           {isRevealAnswer && (
-            <Text style={styles.titleAnswer}>{WORDS[randomInt].creole}</Text>
+            <Text style={styles.titleAnswer}>
+              {testByEnglish
+                ? WORDS[randomInt].creole
+                : WORDS[randomInt].english}
+            </Text>
           )}
-          {/* </View> */}
 
           <View style={styles.answerContainer}>
             <View>
@@ -94,13 +100,18 @@ export default function Home() {
                           },
                         ]}
                       >
-                        {WORDS[randomInt].creole}
+                        {testByEnglish
+                          ? WORDS[randomInt].creole
+                          : WORDS[randomInt].english}
                       </Text>
                     </TouchableOpacity>
                   );
                 } else if (
-                  WORDS[Array.from(setArray)[index]].creole !==
-                  WORDS[randomInt].creole
+                  testByEnglish
+                    ? WORDS[Array.from(setArray)[index]].creole !==
+                      WORDS[randomInt].creole
+                    : WORDS[Array.from(setArray)[index]].creole !==
+                      WORDS[randomInt].english
                 ) {
                   return (
                     <TouchableOpacity
@@ -116,7 +127,9 @@ export default function Home() {
                           },
                         ]}
                       >
-                        {WORDS[Array.from(setArray)[index]].creole}
+                        {testByEnglish
+                          ? WORDS[Array.from(setArray)[index]].creole
+                          : WORDS[Array.from(setArray)[index]].english}
                       </Text>
                     </TouchableOpacity>
                   );

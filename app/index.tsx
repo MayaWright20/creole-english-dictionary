@@ -1,12 +1,31 @@
 import AddWord from '@/components/inputs/add-word/add-word';
 import Switch from '@/components/inputs/switch/switch';
+import { usePersistStore } from '@/store/store';
 import { ScrollView, StyleSheet } from 'react-native';
 
 export default function Index() {
+  const setOrderByEnglish = usePersistStore(
+    (state: any) => state.setOrderByEnglish
+  );
+  const orderByEnglish = usePersistStore((state: any) => state.orderByEnglish);
+  const setTestByEnglish = usePersistStore(
+    (state: any) => state.setTestByEnglish
+  );
+  const testByEnglish = usePersistStore((state: any) => state.testByEnglish);
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <AddWord />
-      <Switch />
+      <Switch
+        orderBy={orderByEnglish}
+        setOrderBy={(value) => setOrderByEnglish(value)}
+        title="Order by"
+      />
+      <Switch
+        title="Test by"
+        setOrderBy={(value) => setTestByEnglish(value)}
+        orderBy={testByEnglish}
+      />
     </ScrollView>
   );
 }
